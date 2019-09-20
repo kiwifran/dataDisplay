@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "./logo.svg";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 import "./App.css";

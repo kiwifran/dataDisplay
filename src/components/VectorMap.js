@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import Pin from "./Pin";
 import ShortInfo from "./ShortInfo";
+import { MAP_TOKEN } from "../constants/API";
 export default class VectorMap extends Component {
 	state = {
 		viewport: {
@@ -55,9 +56,7 @@ export default class VectorMap extends Component {
 				style={{ width: "80%", margin: "0 auto" }}
 				{...this.state.viewport}
 				onViewportChange={viewport => this.setState({ viewport })}
-				mapboxApiAccessToken={
-				
-				}
+				mapboxApiAccessToken={MAP_TOKEN}
 			>
 				{this.props.propertyList.map(this.renderMarker)}
 				{this.renderPopup()}

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+//import from libraries
 import axios from "axios";
 import qs from "qs";
 import Swal from "sweetalert2";
-import PigeonMap from "./Map";
+//import from other files
 import VectorMap from "./VectorMap";
-import { typeCastExpression } from "@babel/types";
+import { GENERAL_API_URL, SEARCH_API_KEY } from "../constants/API";
 export default class Search extends Component {
 	constructor() {
 		super();
@@ -63,9 +64,9 @@ export default class Search extends Component {
 				});
 			},
 			params: {
-				reqUrl: `http://www.zillow.com/webservice/GetDeepSearchResults.htm`,
+				reqUrl: GENERAL_API_URL,
 				params: {
-					"zws-id": "X1-ZWz17nqt50by17_8mfo0",
+					"zws-id": SEARCH_API_KEY,
 					address: address,
 					citystatezip: cityStateZip
 				},
@@ -94,59 +95,7 @@ export default class Search extends Component {
 				});
 			});
 	};
-	componentDidMount() {
-		// axios
-		// 	.get(`http://www.zillow.com/webservice/GetSearchResults.htm`, {
-		// 		params: {
-		// 			"zws-id": "X1-ZWz17nrkrfwpor_82rpe",
-		// 			address: "court St",
-		// 			citystatezip: "Brooklyn NY"
-		// 		}
-		// 	})
-		// 	.then(res => {
-		// 		console.log(res);
-		// 	});
-		// axios({
-		// 	method: "GET",
-		// 	url: "https://proxy.hackeryou.com",
-		// 	dataResponse: "json",
-		// 	paramsSerializer: function(params) {
-		// 		return qs.stringify(params, {
-		// 			arrayFormat: "brackets"
-		// 		});
-		// 	},
-		// 	params: {
-		// 		reqUrl: `http://www.zillow.com/webservice/GetDeepSearchResults.htm`,
-		// 		params: {
-		// 			"zws-id": "X1-ZWz17nqt50by17_8mfo0",
-		// 			address: "court St",
-		// 			citystatezip: "Brooklyn NY"
-		// 		},
-		// 		xmlToJSON: true
-		// 	}
-		// })
-		// 	.then(res => {
-		// 		console.log(res);
-		// 		const data =
-		// 			res.data["SearchResults:searchresults"].response.results
-		// 				.result;
-		// 		console.log(data);
-		// 		const { longitude, latitude } = data[0].address;
-		// 		console.log(longitude, latitude);
-		// 		this.setState({
-		// 			propertyList: [...data],
-		// 			mapCenterLon: +longitude,
-		// 			mapCenterLat: +latitude
-		// 		});
-		// 	})
-		// 	.catch(err => {
-		// 		Swal.fire({
-		// 			title: "Error!",
-		// 			text: "sorry cannot get lists of properties now",
-		// 			confirmButtonText: "Cool"
-		// 		});
-		// 	});
-	}
+	componentDidMount() {}
 	render() {
 		const { propertyList, mapCenterLat, mapCenterLon } = this.state;
 		return (
@@ -157,7 +106,9 @@ export default class Search extends Component {
 					onSubmit={this.handleFormSubmit}
 					id="searchForm"
 				>
-					<label htmlFor="addressInput" className="visuallyHidden" />
+					<label htmlFor="addressInput" className="visuallyHidden">
+						please type in the address
+					</label>
 					<input
 						aria-live="polite"
 						role="status"
@@ -165,12 +116,14 @@ export default class Search extends Component {
 						type="text"
 						id="addressInput"
 						value={this.state.addressInput}
-						placeholder="type in the address"
+						placeholder="please type in the address"
 					/>
 					<label
 						htmlFor="cityStateZipInput"
 						className="visuallyHidden"
-					/>
+					>
+						please type in the city and State or zipCode
+					</label>
 					<input
 						aria-live="polite"
 						role="status"
@@ -178,7 +131,7 @@ export default class Search extends Component {
 						type="text"
 						id="cityStateZipInput"
 						value={this.state.cityStateZipInput}
-						placeholder="type in the city and State or zipCode "
+						placeholder="please type in the city and State or zipCode(us only)"
 					/>
 
 					<button className="submitSearch">Find it</button>
