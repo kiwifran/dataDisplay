@@ -16,7 +16,7 @@ export default class ShortInfo extends PureComponent {
 		const displayName = `${street}, ${city}`;
 
 		return (
-			<div className="popUp">
+			<div className="popUpInfo">
 				<div className="popUpImage">
 					{info.images ? (
 						<img
@@ -29,15 +29,18 @@ export default class ShortInfo extends PureComponent {
 				</div>
 				<div>
 					{displayName}
-					{provideLink ? (
-						<Link to={`/properties/${zpid}`}>Details</Link>
-					) : null}
+
 					<p>
 						{!isNaN(+bedrooms) ? `${+bedrooms} bed` : null}{" "}
-						{!isNaN(+bathrooms) ? `, ${+bathrooms} bath` : null}{" "}
+						{!isNaN(+bathrooms) ? ` ${+bathrooms} bath` : null}{" "}
 						{!isNaN(+info.finishedSqFt)
-							? `, ${info.finishedSqFt} sqft`
+							? ` ${info.finishedSqFt} sqft`
 							: null}
+					</p>
+					<p>
+						{provideLink ? (
+							<Link to={`/properties/${zpid}`}>Details</Link>
+						) : null}
 					</p>
 				</div>
 			</div>

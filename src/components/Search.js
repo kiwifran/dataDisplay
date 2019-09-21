@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 //import from libraries
 import axios from "axios";
 import qs from "qs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import from other files
 import VectorMap from "./VectorMap";
 import Swal from "./SweetAlert";
@@ -31,9 +32,9 @@ export default class Search extends Component {
 		if (!/^\s*$/.test(addressInput) && !/^\s*$/.test(cityStateZipInput)) {
 			console.log(addressInput, cityStateZipInput);
 			// console.log(e.target);
-			document.getElementById("searchForm").reset();
 			console.log("arrived");
 			this.fetchData(addressInput, cityStateZipInput);
+			this.setState({ addressInput: "", cityStateZipInput: "" });
 			// const scrollSpeed = {
 			// 	speed: 2000,
 			// 	minDuration: 1600
@@ -70,7 +71,9 @@ export default class Search extends Component {
 					res.data["SearchResults:searchresults"].response.results
 						.result;
 				console.log(data);
-				const { longitude, latitude } = data[0].address;
+				const { longitude, latitude } = data[
+					Math.floor(data.length / 2) - 1
+				].address;
 				console.log(longitude, latitude);
 				this.setState({
 					propertyList: [...data],
@@ -86,45 +89,56 @@ export default class Search extends Component {
 	render() {
 		const { propertyList, mapCenterLat, mapCenterLon } = this.state;
 		return (
-			<div>
-				<h1>this is the start!!</h1>
-				<form
-					action=""
-					onSubmit={this.handleFormSubmit}
-					id="searchForm"
-				>
-					<label htmlFor="addressInput" className="visuallyHidden">
-						please type in the address
-					</label>
-					<input
-						aria-live="polite"
-						role="status"
-						onChange={this.handleInputChange}
-						type="text"
-						id="addressInput"
-						value={this.state.addressInput}
-						placeholder="please type in the address"
-						required
-					/>
-					<label
-						htmlFor="cityStateZipInput"
-						className="visuallyHidden"
+			<Fragment>
+				<header>
+					<form
+						action=""
+						onSubmit={this.handleFormSubmit}
+						id="searchForm"
 					>
-						please type in the city and State or zipCode
-					</label>
-					<input
-						aria-live="polite"
-						role="status"
-						onChange={this.handleInputChange}
-						type="text"
-						id="cityStateZipInput"
-						value={this.state.cityStateZipInput}
-						placeholder="please type in the city and State or zipCode(us only)"
-						required
-					/>
+						<div className="inputs">
+							<label
+								htmlFor="addressInput"
+								className="visuallyHidden"
+							>
+								please type in the address
+							</label>
+							<input
+								aria-live="polite"
+								role="status"
+								onChange={this.handleInputChange}
+								type="text"
+								id="addressInput"
+								value={this.state.addressInput}
+								placeholder="please type in the address"
+								required
+							/>
+							<label
+								htmlFor="cityStateZipInput"
+								className="visuallyHidden"
+							>
+								please type in the city and State or zipCode
+							</label>
+							<input
+								aria-live="polite"
+								role="status"
+								onChange={this.handleInputChange}
+								type="text"
+								id="cityStateZipInput"
+								value={this.state.cityStateZipInput}
+								placeholder="please type in the city and State or zipCode(us only)"
+								required
+							/>
+						</div>
 
-					<button className="submitSearch">Find it</button>
-				</form>
+						<button
+							aria-labe="find properties"
+							className="submitSearch"
+						>
+							<FontAwesomeIcon icon="key" />
+						</button>
+					</form>
+				</header>
 				{/* <div
 					className="mapContainer"
 					style={{ width: `80%`, margin: "0 auto" }}
@@ -139,7 +153,7 @@ export default class Search extends Component {
 				) : null}
 				{/* </div> */}
 				{/* {PigeonMap} */}
-			</div>
+			</Fragment>
 		);
 	}
 }

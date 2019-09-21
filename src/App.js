@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faKey, faHome } from "@fortawesome/free-solid-svg-icons";
 import "mapbox-gl/dist/mapbox-gl.css";
-
 import "./App.css";
 import Search from "./components/Search";
 import Details from "./components/Details";
-
+library.add(faKey, faHome);
 export default class App extends Component {
 	constructor() {
 		super();
@@ -21,9 +23,12 @@ export default class App extends Component {
 			<Router>
 				<div className="App">
 					<nav>
-						<Link to="/">
-							<p>Search</p>
-						</Link>
+						<div className="iconContainer">
+							<FontAwesomeIcon icon="home" />
+							<Link to="/">
+								<p>Search</p>
+							</Link>
+						</div>
 					</nav>
 					<Route
 						exact

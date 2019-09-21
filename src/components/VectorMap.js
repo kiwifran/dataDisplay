@@ -11,11 +11,11 @@ export default class VectorMap extends Component {
 		super(props);
 		this.state = {
 			viewport: {
-				width: 400,
-				height: 400,
+				width: 1000,
+				height: 600,
 				latitude: this.props.latitude,
 				longitude: this.props.longitude,
-				zoom: 8
+				zoom: 14
 			},
 			popupInfo: null,
 			provideLink: false
@@ -93,7 +93,7 @@ export default class VectorMap extends Component {
 				<Popup
 					className="popUp"
 					tipSize={5}
-					anchor="bottom"
+					anchor="bottom-right"
 					longitude={+popupInfo.address.longitude}
 					latitude={+popupInfo.address.latitude}
 					closeOnClick={false}
@@ -111,7 +111,7 @@ export default class VectorMap extends Component {
 	render() {
 		return (
 			<ReactMapGL
-				style={{ width: "80%", margin: "0 auto" }}
+				style={{ width: "100%", margin: "0 auto" }}
 				{...this.state.viewport}
 				onViewportChange={viewport => this.setState({ viewport })}
 				mapboxApiAccessToken={MAP_TOKEN}
