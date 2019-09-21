@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { DETAILS_API_URL, SEARCH_API_KEY } from "../constants/API";
-import axios from "axios";
-import qs from "qs";
-import Swal from "sweetalert2";
 
 export default function Details(props) {
 	const zpid = props.match.params.propertyId;

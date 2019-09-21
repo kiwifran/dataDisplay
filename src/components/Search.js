@@ -18,6 +18,7 @@ export default class Search extends Component {
 			cityStateZipInput: ""
 		};
 	}
+
 	handleInputChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value
@@ -27,12 +28,7 @@ export default class Search extends Component {
 		e.preventDefault();
 
 		const { addressInput, cityStateZipInput } = this.state;
-		if (
-			addressInput &&
-			cityStateZipInput &&
-			!/^\s*$/.test(addressInput) &&
-			!/^\s*$/.test(cityStateZipInput)
-		) {
+		if (!/^\s*$/.test(addressInput) && !/^\s*$/.test(cityStateZipInput)) {
 			console.log(addressInput, cityStateZipInput);
 			// console.log(e.target);
 			document.getElementById("searchForm").reset();
@@ -117,6 +113,7 @@ export default class Search extends Component {
 						id="addressInput"
 						value={this.state.addressInput}
 						placeholder="please type in the address"
+						required
 					/>
 					<label
 						htmlFor="cityStateZipInput"
@@ -132,6 +129,7 @@ export default class Search extends Component {
 						id="cityStateZipInput"
 						value={this.state.cityStateZipInput}
 						placeholder="please type in the city and State or zipCode(us only)"
+						required
 					/>
 
 					<button className="submitSearch">Find it</button>

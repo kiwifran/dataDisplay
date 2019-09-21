@@ -21,12 +21,12 @@
 -   possibility to add tabindex for accessibility?
     =>find a way to choose a better location to set as the center for the map, now the app is using the location of the first property in the data array as the center.
 
-    4.make second api call when use click on the link from the popup to get details
+    4.make second api call when use click on the link from the popup to get details⭕
 
--   use proxy and parse xml to json
--   error handling
+-   use proxy and parse xml to json⭕
+-   error handling⭕
 
-    5.display the information( routing or modal?)
+    5.display the information( routing or modal?)-routing⭕
 
 -   if using routing, can use local storage to retrieve the the former location and status of the map; and if it takes some time to load the map again, add a preloader
 

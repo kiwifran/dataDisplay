@@ -1,22 +1,34 @@
 import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import Pin from "./Pin";
+import axios from "axios";
+import qs from "qs";
+import Swal from "sweetalert2";
 import ShortInfo from "./ShortInfo";
-import { MAP_TOKEN } from "../constants/API";
+import { DETAILS_API_URL, SEARCH_API_KEY, MAP_TOKEN } from "../constants/API";
 export default class VectorMap extends Component {
-	state = {
-		viewport: {
-			width: 400,
-			height: 400,
-			latitude: this.props.latitude,
-			longitude: this.props.longitude,
-			zoom: 8
-		},
-		popupInfo: null
+	constructor(props) {
+		super(props);
+		this.state = {
+			viewport: {
+				width: 400,
+				height: 400,
+				latitude: this.props.latitude,
+				longitude: this.props.longitude,
+				zoom: 8
+			},
+			popupInfo: null,
+			selectedId: ""
+		};
+	}
+	handleClickOnMap = selectedId => {
+		this.setState({ selectedId });
 	};
-
 	renderMarker = (info, index) => {
-		const { longitude, latitude } = info.address;
+		const {
+			address: { longitude, latitude },
+			zpid
+		} = info.address;
 		return (
 			<Marker
 				key={`marker-${index}`}
@@ -25,7 +37,8 @@ export default class VectorMap extends Component {
 			>
 				<Pin
 					size={20}
-					onClick={() => this.setState({ popupInfo: info })}
+					// onClick={() => this.setState({ popupInfo: info })}
+					onClick={() => this.handleClickOnMap(zpid)}
 				/>
 			</Marker>
 		);
