@@ -3,8 +3,8 @@ import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import Pin from "./Pin";
 import axios from "axios";
 import qs from "qs";
-import Swal from "sweetalert2";
 import ShortInfo from "./ShortInfo";
+import Swal from "./SweetAlert";
 import { DETAILS_API_URL, SEARCH_API_KEY, MAP_TOKEN } from "../constants/API";
 export default class VectorMap extends Component {
 	constructor(props) {
@@ -28,7 +28,7 @@ export default class VectorMap extends Component {
 		const {
 			address: { longitude, latitude },
 			zpid
-		} = info.address;
+		} = info;
 		return (
 			<Marker
 				key={`marker-${index}`}
@@ -38,7 +38,11 @@ export default class VectorMap extends Component {
 				<Pin
 					size={20}
 					// onClick={() => this.setState({ popupInfo: info })}
-					onClick={() => this.handleClickOnMap(zpid)}
+					onClick={() => {
+						this.handleClickOnMap(zpid);
+
+						this.setState({ popupInfo: info });
+					}}
 				/>
 			</Marker>
 		);
@@ -71,7 +75,8 @@ export default class VectorMap extends Component {
 				onViewportChange={viewport => this.setState({ viewport })}
 				mapboxApiAccessToken={MAP_TOKEN}
 			>
-				{this.props.propertyList.map(this.renderMarker)}
+				{this.props.propertyList.length &&
+					this.props.propertyList.map(this.renderMarker)}
 				{this.renderPopup()}
 			</ReactMapGL>
 		);

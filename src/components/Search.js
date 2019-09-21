@@ -2,9 +2,9 @@ import React, { Component } from "react";
 //import from libraries
 import axios from "axios";
 import qs from "qs";
-import Swal from "sweetalert2";
 //import from other files
 import VectorMap from "./VectorMap";
+import Swal from "./SweetAlert";
 import { GENERAL_API_URL, SEARCH_API_KEY } from "../constants/API";
 export default class Search extends Component {
 	constructor() {
@@ -42,12 +42,7 @@ export default class Search extends Component {
 			// 	document.querySelector(".resultWrapper"),
 			// 	scrollSpeed
 			// );
-		} else
-			Swal.fire({
-				title: "Input Error!",
-				text: "Please check your input",
-				confirmButtonText: "Cool"
-			});
+		} else Swal("Input Error!", "Please check your input");
 	};
 	fetchData = (address, cityStateZip) => {
 		axios({
@@ -84,11 +79,7 @@ export default class Search extends Component {
 				});
 			})
 			.catch(err => {
-				Swal.fire({
-					title: "Error!",
-					text: "sorry cannot get lists of properties now",
-					confirmButtonText: "Cool"
-				});
+				Swal("Error!", "sorry cannot get lists of properties now");
 			});
 	};
 	componentDidMount() {}
