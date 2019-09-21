@@ -1,9 +1,10 @@
 import React, { PureComponent } from "react";
 import { Link } from "react-router-dom";
-
+import defaultPic from "../assets/defaultPic.jpg";
 export default class ShortInfo extends PureComponent {
 	render() {
 		const {
+			provideLink,
 			info,
 			info: {
 				bathrooms,
@@ -16,9 +17,21 @@ export default class ShortInfo extends PureComponent {
 
 		return (
 			<div className="popUp">
+				<div className="popUpImage">
+					{info.images ? (
+						<img
+							src={info.images.image.url[0]}
+							alt="property picture"
+						/>
+					) : (
+						<img src={defaultPic} alt="default picture" />
+					)}
+				</div>
 				<div>
 					{displayName}
-					<Link to={`/properties/${zpid}`}>Details</Link>
+					{provideLink ? (
+						<Link to={`/properties/${zpid}`}>Details</Link>
+					) : null}
 					<p>
 						{!isNaN(+bedrooms) ? `${+bedrooms} bed` : null}{" "}
 						{!isNaN(+bathrooms) ? `, ${+bathrooms} bath` : null}{" "}

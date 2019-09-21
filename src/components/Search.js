@@ -134,6 +134,7 @@ export default class Search extends Component {
 						propertyList={propertyList}
 						longitude={mapCenterLon}
 						latitude={mapCenterLat}
+						handleClickOnMap={this.props.handleClickOnMap}
 					/>
 				) : null}
 				{/* </div> */}

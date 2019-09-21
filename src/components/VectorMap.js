@@ -18,11 +18,53 @@ export default class VectorMap extends Component {
 				zoom: 8
 			},
 			popupInfo: null,
-			selectedId: ""
+			provideLink: false
 		};
 	}
-	handleClickOnMap = selectedId => {
-		this.setState({ selectedId });
+	handleClick = async (zpid, info) => {
+		try {
+			const data = await axios({
+				method: "GET",
+				url: "https://proxy.hackeryou.com",
+				dataResponse: "json",
+				paramsSerializer: function(params) {
+					return qs.stringify(params, {
+						arrayFormat: "brackets"
+					});
+				},
+				params: {
+					reqUrl: DETAILS_API_URL,
+					params: {
+						"zws-id": SEARCH_API_KEY,
+						zpid
+					},
+					xmlToJSON: true
+				}
+			});
+			console.log(data);
+			const {
+				message: { code }
+			} = data.data["UpdatedPropertyDetails:updatedPropertyDetails"];
+			if (code === "0") {
+				const { response } = data.data[
+					"UpdatedPropertyDetails:updatedPropertyDetails"
+				];
+				this.setState({
+					popupInfo: response,
+					provideLink: true
+				});
+				this.props.handleClickOnMap(response);
+
+				console.log("state set");
+			} else {
+				// Swal("Error!", "sorry, cannot get details now😢");
+				console.log(`error code ${code}`);
+				this.setState({ popupInfo: info });
+			}
+		} catch (err) {
+			// Swal("Error!", "sorry cannot get lists of properties now");
+			console.log(`error:${err}`);
+		}
 	};
 	renderMarker = (info, index) => {
 		const {
@@ -38,17 +80,13 @@ export default class VectorMap extends Component {
 				<Pin
 					size={20}
 					// onClick={() => this.setState({ popupInfo: info })}
-					onClick={() => {
-						this.handleClickOnMap(zpid);
-
-						this.setState({ popupInfo: info });
-					}}
+					onClick={() => this.handleClick(zpid, info)}
 				/>
 			</Marker>
 		);
 	};
 	renderPopup = () => {
-		const { popupInfo } = this.state;
+		const { popupInfo, provideLink } = this.state;
 		// const= popupInfo.address;
 		return (
 			popupInfo && (
@@ -59,13 +97,16 @@ export default class VectorMap extends Component {
 					longitude={+popupInfo.address.longitude}
 					latitude={+popupInfo.address.latitude}
 					closeOnClick={false}
-					onClose={() => this.setState({ popupInfo: null })}
+					onClose={() =>
+						this.setState({ popupInfo: null, provideLink: false })
+					}
 				>
-					<ShortInfo info={popupInfo} />
+					<ShortInfo info={popupInfo} provideLink={provideLink} />
 				</Popup>
 			)
 		);
 	};
+	fetchDetails = async zpid => {};
 
 	render() {
 		return (
