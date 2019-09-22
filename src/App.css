@@ -20,6 +20,10 @@ p {
 a {
 	text-decoration: none;
 }
+img {
+	width: 100%;
+	height: 100%;
+}
 .App {
 	text-align: center;
 }
@@ -44,7 +48,7 @@ nav a {
 	justify-content: left;
 	align-items: center;
 }
-header {
+header.searchHeader {
 	height: calc(100vh - 45px);
 	position: relative;
 	padding-top: 30%;
@@ -81,18 +85,22 @@ form [type="text"] {
 .submitSearch :hover{
 	color:burlywood;
 }
+.mapContainer {
+	width: 100vw;
+	height:100vh;
+}
+.mapContainer>div {
+	width: 100% !important;
+}
 .popUpInfo, 
 .popUpImage {
 	width: 240px;
 }
-.popUp {
+/* .popUp {
 	background: red;
-}
+} */
 
 .popUpImage {
 	height: 120px;
 }
-.popUpImage img {
-	width: 100%;
-	height: 100%;
-}
+/* .popUpImage  */

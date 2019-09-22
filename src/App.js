@@ -2,21 +2,27 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faKey, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+	faKey,
+	faHome,
+	faBed,
+	faBath
+} from "@fortawesome/free-solid-svg-icons";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
 import Search from "./components/Search";
 import Details from "./components/Details";
-library.add(faKey, faHome);
+library.add(faKey, faHome, faBed, faBath);
 export default class App extends Component {
 	constructor() {
 		super();
 		this.state = {
-			infoDetails: null
+			infoDetails: null,
+			zestimate: null
 		};
 	}
-	handleClickOnMap = info => {
-		this.setState({ infoDetails: info });
+	handleClickOnMap = (info, zestimate) => {
+		this.setState({ infoDetails: info, zestimate });
 	};
 	render() {
 		return (
@@ -45,7 +51,10 @@ export default class App extends Component {
 						path="/properties/:propertyId"
 						render={() => {
 							return (
-								<Details infoDetails={this.state.infoDetails} />
+								<Details
+									infoDetails={this.state.infoDetails}
+									zestimate={this.state.zestimate}
+								/>
 							);
 						}}
 					/>

@@ -11,17 +11,17 @@ export default class VectorMap extends Component {
 		super(props);
 		this.state = {
 			viewport: {
-				width: 1000,
-				height: 600,
+				width: "100%",
+				height: "100%",
 				latitude: this.props.latitude,
 				longitude: this.props.longitude,
-				zoom: 14
+				zoom: 12
 			},
 			popupInfo: null,
 			provideLink: false
 		};
 	}
-	handleClick = async (zpid, info) => {
+	handleClick = async (zpid, info, index) => {
 		try {
 			const data = await axios({
 				method: "GET",
@@ -53,7 +53,9 @@ export default class VectorMap extends Component {
 					popupInfo: response,
 					provideLink: true
 				});
-				this.props.handleClickOnMap(response);
+				const { zestimate } = this.props.propertyList[index];
+				console.log(zestimate);
+				this.props.handleClickOnMap(response, zestimate);
 
 				console.log("state set");
 			} else {
@@ -80,14 +82,13 @@ export default class VectorMap extends Component {
 				<Pin
 					size={20}
 					// onClick={() => this.setState({ popupInfo: info })}
-					onClick={() => this.handleClick(zpid, info)}
+					onClick={() => this.handleClick(zpid, info, index)}
 				/>
 			</Marker>
 		);
 	};
 	renderPopup = () => {
 		const { popupInfo, provideLink } = this.state;
-		// const= popupInfo.address;
 		return (
 			popupInfo && (
 				<Popup
@@ -106,14 +107,26 @@ export default class VectorMap extends Component {
 			)
 		);
 	};
-	fetchDetails = async zpid => {};
-
+	componentDidUpdate(prevProps, prevStae) {
+		if (prevProps.longitude !== this.props.longitude) {
+			const newViewport = {
+				...this.state.viewport,
+				longitude: this.props.longitude,
+				latitude: this.props.latitude,
+				zoom: 12
+			};
+			this.setState({
+				viewport: newViewport
+			});
+		}
+	}
 	render() {
 		return (
 			<ReactMapGL
-				style={{ width: "100%", margin: "0 auto" }}
+				// style={{ width: "100%", margin: "0 auto" }}
 				{...this.state.viewport}
 				onViewportChange={viewport => this.setState({ viewport })}
+				mapStyle="mapbox://styles/mapbox/streets-v10"
 				mapboxApiAccessToken={MAP_TOKEN}
 			>
 				{this.props.propertyList.length &&

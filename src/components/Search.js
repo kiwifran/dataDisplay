@@ -90,7 +90,7 @@ export default class Search extends Component {
 		const { propertyList, mapCenterLat, mapCenterLon } = this.state;
 		return (
 			<Fragment>
-				<header>
+				<header className="searchHeader">
 					<form
 						action=""
 						onSubmit={this.handleFormSubmit}
@@ -132,26 +132,25 @@ export default class Search extends Component {
 						</div>
 
 						<button
-							aria-labe="find properties"
+							aria-label="find properties"
 							className="submitSearch"
 						>
 							<FontAwesomeIcon icon="key" />
 						</button>
 					</form>
 				</header>
-				{/* <div
-					className="mapContainer"
-					style={{ width: `80%`, margin: "0 auto" }}
-				> */}
+
 				{mapCenterLat && mapCenterLon ? (
-					<VectorMap
-						propertyList={propertyList}
-						longitude={mapCenterLon}
-						latitude={mapCenterLat}
-						handleClickOnMap={this.props.handleClickOnMap}
-					/>
+					<div className="mapContainer">
+						<VectorMap
+							propertyList={propertyList}
+							longitude={mapCenterLon}
+							latitude={mapCenterLat}
+							handleClickOnMap={this.props.handleClickOnMap}
+						/>
+					</div>
 				) : null}
-				{/* </div> */}
+
 				{/* {PigeonMap} */}
 			</Fragment>
 		);
