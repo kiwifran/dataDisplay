@@ -13,7 +13,7 @@ export default function Details(props) {
 
 	return (
 		<div className="detailsContainer">
-			<div className="detailPicture infoContainer">
+			<div className="detailPicture">
 				{/* sometimes in the database when there is only one picture for the property, the database stores the url directly as the value for the url property, instead of storing it inside an array */}
 				{images && images.image.url[0].length > 1 ? (
 					<div className="detailPicture">
@@ -33,9 +33,17 @@ export default function Details(props) {
 			<div className="addressInfo  infoContainer">
 				{amount && amount["$t"] ? (
 					<h2>
-						<span>Zestimate:</span> {amount.currency} {amount["$t"]}
+						<span>Zestimate:</span> {amount.currency}{" "}
+						{parseInt(amount["$t"]).toLocaleString()}
 					</h2>
 				) : null}
+				<p>{address.street}</p>
+				<p>
+					{address.city} {address.state}
+				</p>
+				<p>
+					<span>Zip Code</span>: {address.zipcode}
+				</p>
 				{editedFacts && editedFacts.usecode ? (
 					<p>
 						<span>type:</span> {editedFacts.usecode}
@@ -52,20 +60,12 @@ export default function Details(props) {
 				) : null}
 				{editedFacts && editedFacts.yearUpdated ? (
 					<p>
-						<span>Built in </span>
+						<span>Updated in </span>
 						{editedFacts.yearUpdated}{" "}
 					</p>
 				) : null}
-
-				<p>{address.street}</p>
-				<p>
-					{address.city} {address.state}
-				</p>
-				<p>
-					<span>Zip Code</span>: {address.zipcode}
-				</p>
 			</div>
-			<div className="propertydetails infoContainer">
+			<div className="propertyDetails infoContainer">
 				{editedFacts && editedFacts.applicances ? (
 					<p>
 						<span>type:</span> {editedFacts.applicances}

@@ -35,14 +35,6 @@ export default class Search extends Component {
 			console.log("arrived");
 			this.fetchData(addressInput, cityStateZipInput);
 			this.setState({ addressInput: "", cityStateZipInput: "" });
-			// const scrollSpeed = {
-			// 	speed: 2000,
-			// 	minDuration: 1600
-			// };
-			// animateScrollTo(
-			// 	document.querySelector(".resultWrapper"),
-			// 	scrollSpeed
-			// );
 		} else Swal("Input Error!", "Please check your input");
 	};
 	fetchData = (address, cityStateZip) => {

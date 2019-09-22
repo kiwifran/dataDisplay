@@ -24,7 +24,9 @@ a {
 img {
 	width: 100%;
 	height: 100%;
+	display: block;
 }
+
 .App {
 	text-align: center;
 }
@@ -72,7 +74,7 @@ form [type="text"] {
 	border-radius: 10px;
 }
 .inputs {
-	 justify-content: space-between;
+	justify-content: space-between;
 }
 .submitSearch {
 	width: 50px;
@@ -109,9 +111,12 @@ form [type="text"] {
 	justify-content: space-between;
 	flex-wrap: wrap;
 }
-
-.infoContainer {
+.detailPicture,
+.infoContainer{
 	width: 50%;
+}
+.infoContainer {
+	
 	padding:20px 30px;
 	display: flex;
 	flex-direction: column;
@@ -124,5 +129,58 @@ form [type="text"] {
 .propertyDetails,
 .description {
 	order:3;
+}
+.addressInfo,
+.description {
 	background-color: #d5e1df
+
+}
+
+@media (max-width:900px) {
+	header.searchHeader {
+		padding-top:37%;
+	}
+}
+
+@media (max-width:880px) {
+	.detailPicture,
+	.infoContainer {
+		width: 100%;
+		
+	}
+	.detailPicture {
+		order:0;
+	}
+}
+@media (max-width:750px) {
+	.inputs {
+		flex-wrap: wrap;
+	}
+	form [type="text"] {
+	width: 80%;
+	margin: 5px auto;
+	}
+	
+}
+
+@media (max-width:520px) {
+	header.searchHeader {
+		padding-top: 52%;
+	}
+	form [type="text"] {
+		height:40px;
+	}
+	
+	.description p {
+		line-height: 1.2;
+		font-size: 18px;
+	}
+	
+}
+@media (max-width:450px) {
+	header.searchHeader {
+		padding-top: 68%;
+	}
+	
+	
 }

@@ -46,12 +46,14 @@ export default class ShortInfo extends PureComponent {
 						) : null}
 						{editedFacts && editedFacts.bathrooms ? (
 							<span>
+								{" "}
 								<FontAwesomeIcon icon="bath" />{" "}
 								{+editedFacts.bathrooms}
 							</span>
 						) : null}
 						{!isNaN(+bathrooms) ? (
 							<span>
+								{" "}
 								<FontAwesomeIcon icon="bath" /> {+bathrooms}
 							</span>
 						) : null}
