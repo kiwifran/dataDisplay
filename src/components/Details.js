@@ -12,14 +12,7 @@ export default function Details(props) {
 	// const {}
 
 	return (
-		<header
-		// className="detailHeader"
-		// style={
-		// 	images && images.image.url[0]
-		// 		? { backgroundImage: `url(${images.image.url[0]})` }
-		// 		: null
-		// }
-		>
+		<div className="detailsContainer">
 			<div className="detailPicture infoContainer">
 				{/* sometimes in the database when there is only one picture for the property, the database stores the url directly as the value for the url property, instead of storing it inside an array */}
 				{images && images.image.url[0].length > 1 ? (
@@ -40,7 +33,7 @@ export default function Details(props) {
 			<div className="addressInfo  infoContainer">
 				{amount && amount["$t"] ? (
 					<h2>
-						<span>Zestimate</span>:{amount.currency} {amount["$t"]}
+						<span>Zestimate:</span> {amount.currency} {amount["$t"]}
 					</h2>
 				) : null}
 				{editedFacts && editedFacts.usecode ? (
@@ -107,6 +100,6 @@ export default function Details(props) {
 					<p>{homeDescription}</p>
 				</div>
 			) : null}
-		</header>
+		</div>
 	);
 }
