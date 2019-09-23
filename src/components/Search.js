@@ -114,7 +114,7 @@ export default class Search extends Component {
 								htmlFor="cityStateZipInput"
 								className="visuallyHidden"
 							>
-								please type in the city or State or zipCode
+								please type in the city and State or the zipCode
 								(zipcode for US only)
 							</label>
 							<input
@@ -124,7 +124,7 @@ export default class Search extends Component {
 								type="text"
 								id="cityStateZipInput"
 								value={this.state.cityStateZipInput}
-								placeholder="please type in the city or State or zipCode(US only)"
+								placeholder="please type in the city and State or zipCode(US only)"
 								required
 							/>
 						</div>
