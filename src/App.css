@@ -85,7 +85,15 @@ form [type="text"] {
 	color:whitesmoke;
 
 }
-.submitSearch :hover{
+
+.inputs input:focus {
+	border: 5px inset  rgba(72,157,134,0.7)
+}
+.inputs input::placeholder {
+	font-size: 16px;
+}
+.submitSearch:hover,
+.submitSearch:focus {
 	color:burlywood;
 }
 .mapContainer {
@@ -122,7 +130,9 @@ form [type="text"] {
 	flex-direction: column;
 	justify-content: center;
 }
-
+.infoContainer:focus {
+	border:2px inset  rgba(72,157,134,0.7);
+}
 .detailPicture {
 	order:1;
 }

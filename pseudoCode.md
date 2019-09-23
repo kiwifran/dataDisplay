@@ -17,8 +17,9 @@
 
 -   better ui for markers and info popup on the map
 -   may add error handling for problems in loading maps
--   possibility to add tabindex for accessibility?
-    =>find a way to choose a better location to set as the center for the map, now the app is using the location of the first property in the data array as the center.
+-   Accessibility? ⭕
+    -   accessibility on the map? it's possible to make the map popup accessible according to the jQuery way explained in http://blog.2wav.com/making-mapbox-popups-accessible/ and some alternative ideas mentioned in https://github.com/mapbox/mapbox-gl-accessibility/issues/20, might not have time to try them...
+-   find a way to choose a better location to set as the center for the map, now the app is using the location of the first property in the data array as the center.
 
 4.make second api call when use click on the link from the popup to get details⭕
 
@@ -29,6 +30,7 @@
 
 -   refactor with useContext to pass values, e.g.the info object for details component
 -   if using routing, can use local storage to retrieve the the former location and status of the map; and if it takes some time to load the map again, add a preloader
+    5
 
 6.testing with testing-library/react
 

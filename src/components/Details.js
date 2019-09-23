@@ -30,7 +30,7 @@ export default function Details(props) {
 				)}
 			</div>
 
-			<div className="addressInfo  infoContainer">
+			<div className="addressInfo  infoContainer" tabIndex={0}>
 				{amount && amount["$t"] ? (
 					<h2>
 						<span>Zestimate:</span> {amount.currency}{" "}
@@ -65,7 +65,7 @@ export default function Details(props) {
 					</p>
 				) : null}
 			</div>
-			<div className="propertyDetails infoContainer">
+			<div className="propertyDetails infoContainer" tabIndex={0}>
 				{editedFacts && editedFacts.applicances ? (
 					<p>
 						<span>type:</span> {editedFacts.applicances}
@@ -95,7 +95,7 @@ export default function Details(props) {
 				) : null}
 			</div>
 			{homeDescription ? (
-				<div className="description infoContainer">
+				<div className="description infoContainer" tabIndex={0}>
 					<h3>Home description</h3>
 					<p>{homeDescription}</p>
 				</div>
