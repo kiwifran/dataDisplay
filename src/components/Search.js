@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 //import from libraries
 import axios from "axios";
 import qs from "qs";
+import jump from "jump.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import from other files
 import VectorMap from "./VectorMap";
@@ -71,6 +72,10 @@ export default class Search extends Component {
 					propertyList: [...data],
 					mapCenterLon: +longitude,
 					mapCenterLat: +latitude
+				});
+				jump(".mapContainer", {
+					duration: 1600,
+					a11y: true
 				});
 			})
 			.catch(err => {
