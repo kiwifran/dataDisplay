@@ -1,44 +1,25 @@
 import React, { useState, useEffect } from "react";
 import defaultPicLarge from "../assets/defaultPicLarge.jpg";
 export default function Details(props) {
-	// const initialDetails =
-	// 	props.infoDetails ||
-	// 	JSON.parse(window.sessionStorage.getItem("details"));
-	// const initialZestimate =
-	// 	props.zestimate ||
-	// 	JSON.parse(window.sessionStorage.getItem("zestimate"));
-	const initialPropertyInfo =
-		props.propertyInfo ||
-		JSON.parse(window.sessionStorage.getItem("storedPropertyInfo"));
-	// const [propertyDetails, setDetails] = useState(initialDetails);
-	// const [zestimateObj, setZestimate] = useState(initialZestimate);
-	const [propertyInfoState, setInfo] = useState(initialPropertyInfo);
-	// const { images, editedFacts, address, homeDescription } = propertyDetails;
-	// const { amount } = zestimateObj;
-	const {
-		images,
-		editedFacts,
-		address,
-		homeDescription
-	} = propertyInfoState.infoDetails;
-	const { amount } = propertyInfoState.zestimate;
+	const initialDetails =
+		props.infoDetails ||
+		JSON.parse(window.sessionStorage.getItem("details"));
+	const initialZestimate =
+		props.zestimate ||
+		JSON.parse(window.sessionStorage.getItem("zestimate"));
+	const [detailState, setDetails] = useState(initialDetails);
+	const [zestimateState, setZestimate] = useState(initialZestimate);
+	const { images, editedFacts, address, homeDescription } = detailState;
+	const { amount } = zestimateState;
 	// const zpid = props.match.params.propertyId;
-	// useEffect(() => {
-	// 	window.sessionStorage.setItem(
-	// 		"details",
-	// 		JSON.stringify(propertyDetails)
-	// 	);
-	// 	window.sessionStorage.setItem(
-	// 		"zestimate",
-	// 		JSON.stringify(zestimateObj)
-	// 	);
-	// }, [initialDetails]);
 	useEffect(() => {
+		window.sessionStorage.setItem("details", JSON.stringify(detailState));
 		window.sessionStorage.setItem(
-			"storedPropertyInfo",
-			JSON.stringify(propertyInfoState)
+			"zestimate",
+			JSON.stringify(zestimateState)
 		);
-	}, [initialPropertyInfo]);
+	}, [initialDetails]);
+
 	return (
 		<div className="detailsContainer">
 			<div className="detailPicture">
@@ -93,7 +74,7 @@ export default function Details(props) {
 					</p>
 				) : null}
 			</div>
-			<div className="propertyDetails infoContainer" tabIndex={0}>
+			<div className="detailStates infoContainer" tabIndex={0}>
 				{editedFacts && editedFacts.applicances ? (
 					<p>
 						<span>type:</span> {editedFacts.applicances}
