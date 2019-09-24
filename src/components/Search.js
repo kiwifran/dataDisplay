@@ -1,43 +1,41 @@
 import React, { Component, Fragment } from "react";
-//import from libraries
+//packages import
 import axios from "axios";
 import qs from "qs";
 import jump from "jump.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import from other files
-import VectorMap from "./VectorMap";
+//files and components import
 import Swal from "./SweetAlert";
+import VectorMap from "./VectorMap";
 import { GENERAL_API_URL, SEARCH_API_KEY } from "../constants/API";
 export default class Search extends Component {
 	constructor() {
 		super();
-
 		this.state = {
-			propertyList: [],
+			propertyList: null,
 			mapCenterLat: null,
 			mapCenterLon: null,
 			addressInput: "",
-			cityStateZipInput: ""
+			cityStateZipInput: "",
+			isMapShown: null
 		};
 	}
-
+	//handle the change of the input
 	handleInputChange = e => {
 		this.setState({
 			[e.target.id]: e.target.value
 		});
 	};
+	//when user submit the form, use the input to call api and save the data in the state
 	handleFormSubmit = e => {
 		e.preventDefault();
-
 		const { addressInput, cityStateZipInput } = this.state;
 		if (!/^\s*$/.test(addressInput) && !/^\s*$/.test(cityStateZipInput)) {
-			console.log(addressInput, cityStateZipInput);
-			// console.log(e.target);
-			console.log("arrived");
 			this.fetchData(addressInput, cityStateZipInput);
 			this.setState({ addressInput: "", cityStateZipInput: "" });
 		} else Swal("Input Error!", "Please check your input");
 	};
+	//call the search endpoint of api
 	fetchData = (address, cityStateZip) => {
 		axios({
 			method: "GET",
@@ -59,20 +57,24 @@ export default class Search extends Component {
 			}
 		})
 			.then(res => {
-				console.log(res);
+				// set the longitude and latitude of the middle property in the data array as the center of the map
 				const data =
 					res.data["SearchResults:searchresults"].response.results
 						.result;
-				console.log(data);
 				const { longitude, latitude } = data[
 					Math.floor(data.length / 2) - 1
 				].address;
-				console.log(longitude, latitude);
 				this.setState({
 					propertyList: [...data],
 					mapCenterLon: +longitude,
 					mapCenterLat: +latitude
 				});
+				// store the data in the session storage for later use
+				window.sessionStorage.setItem(
+					"propertyList",
+					JSON.stringify(data)
+				);
+				// scroll to the map after the api call gets data successfully
 				jump(".mapContainer", {
 					duration: 1600,
 					a11y: true
@@ -82,9 +84,20 @@ export default class Search extends Component {
 				Swal("Error!", "sorry cannot get lists of properties now");
 			});
 	};
-	componentDidMount() {}
+	// check if there is a mapStatus value already stored in the session storage
+	componentDidMount() {
+		const mapStatus = window.sessionStorage.isMapShown;
+		if (mapStatus) {
+			this.setState({ isMapShown: mapStatus });
+		}
+	}
 	render() {
-		const { propertyList, mapCenterLat, mapCenterLon } = this.state;
+		const {
+			propertyList,
+			mapCenterLat,
+			mapCenterLon,
+			isMapShown
+		} = this.state;
 		return (
 			<Fragment>
 				<header className="searchHeader">
@@ -128,7 +141,6 @@ export default class Search extends Component {
 								required
 							/>
 						</div>
-
 						<button
 							aria-label="find properties"
 							className="submitSearch"
@@ -137,8 +149,8 @@ export default class Search extends Component {
 						</button>
 					</form>
 				</header>
-
-				{mapCenterLat && mapCenterLon ? (
+				{/* render the map if user submits inputs or user comes back from details page */}
+				{(mapCenterLat && mapCenterLon) || isMapShown ? (
 					<div className="mapContainer">
 						<VectorMap
 							propertyList={propertyList}
@@ -148,8 +160,6 @@ export default class Search extends Component {
 						/>
 					</div>
 				) : null}
-
-				{/* {PigeonMap} */}
 			</Fragment>
 		);
 	}
