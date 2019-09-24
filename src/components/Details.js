@@ -18,7 +18,7 @@ export default function Details(props) {
 			"zestimate",
 			JSON.stringify(zestimateState)
 		);
-	}, [initialDetails]);
+	}, [props.match.params.propertyId]);
 
 	return (
 		<div className="detailsContainer">
@@ -59,7 +59,10 @@ export default function Details(props) {
 					</p>
 				) : null}
 				{editedFacts && editedFacts.finishedSqFt ? (
-					<p>{editedFacts.finishedSqFt} sqft </p>
+					<p>
+						{parseInt(editedFacts.finishedSqFt).toLocaleString()}{" "}
+						sqft{" "}
+					</p>
 				) : null}
 				{editedFacts && editedFacts.yearBuilt ? (
 					<p>

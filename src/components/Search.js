@@ -13,11 +13,12 @@ export default class Search extends Component {
 		super();
 
 		this.state = {
-			propertyList: [],
+			propertyList: null,
 			mapCenterLat: null,
 			mapCenterLon: null,
 			addressInput: "",
-			cityStateZipInput: ""
+			cityStateZipInput: "",
+			isMapShown: null
 		};
 	}
 
@@ -73,6 +74,10 @@ export default class Search extends Component {
 					mapCenterLon: +longitude,
 					mapCenterLat: +latitude
 				});
+				window.sessionStorage.setItem(
+					"propertyList",
+					JSON.stringify(data)
+				);
 				jump(".mapContainer", {
 					duration: 1600,
 					a11y: true
@@ -82,9 +87,19 @@ export default class Search extends Component {
 				Swal("Error!", "sorry cannot get lists of properties now");
 			});
 	};
-	componentDidMount() {}
+	componentDidMount() {
+		const mapStatus = window.sessionStorage.isMapShown;
+		if (mapStatus) {
+			this.setState({ isMapShown: mapStatus });
+		}
+	}
 	render() {
-		const { propertyList, mapCenterLat, mapCenterLon } = this.state;
+		const {
+			propertyList,
+			mapCenterLat,
+			mapCenterLon,
+			isMapShown
+		} = this.state;
 		return (
 			<Fragment>
 				<header className="searchHeader">
@@ -138,7 +153,7 @@ export default class Search extends Component {
 					</form>
 				</header>
 
-				{mapCenterLat && mapCenterLon ? (
+				{(mapCenterLat && mapCenterLon) || isMapShown ? (
 					<div className="mapContainer">
 						<VectorMap
 							propertyList={propertyList}

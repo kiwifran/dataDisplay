@@ -49,9 +49,10 @@ export default class App extends Component {
 					/>
 					<Route
 						path="/properties/:propertyId"
-						render={() => {
+						render={props => {
 							return (
 								<Details
+									{...props}
 									infoDetails={this.state.infoDetails}
 									zestimate={this.state.zestimate}
 								/>

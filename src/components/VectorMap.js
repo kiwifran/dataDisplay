@@ -10,15 +10,15 @@ export default class VectorMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			viewport: {
-				width: "100%",
-				height: "100%",
-				latitude: this.props.latitude,
-				longitude: this.props.longitude,
-				zoom: 12
-			},
-			popupInfo: null,
-			provideLink: false
+			// viewport: {
+			// 	width: "100%",
+			// 	height: "100%",
+			// 	latitude: this.props.latitude,
+			// 	longitude: this.props.longitude,
+			// 	zoom: 12
+			// },
+			// popupInfo: null,
+			// provideLink: false
 		};
 	}
 	handleClick = async (zpid, info, index) => {
@@ -53,7 +53,12 @@ export default class VectorMap extends Component {
 					popupInfo: response,
 					provideLink: true
 				});
-				const { zestimate } = this.props.propertyList[index];
+				console.log("popupstate set");
+				const list =
+					this.props.propertyList ||
+					JSON.parse(window.sessionStorage.getItem("propertyList"));
+				console.log(list);
+				const { zestimate } = list[index];
 				console.log(zestimate);
 				this.props.handleClickOnMap(response, zestimate);
 
@@ -61,7 +66,7 @@ export default class VectorMap extends Component {
 			} else {
 				// Swal("Error!", "sorry, cannot get details now😢");
 				console.log(`error code ${code}`);
-				this.setState({ popupInfo: info });
+				this.setState({ popupInfo: info, provideLink: false });
 			}
 		} catch (err) {
 			// Swal("Error!", "sorry cannot get lists of properties now");
@@ -107,7 +112,24 @@ export default class VectorMap extends Component {
 			)
 		);
 	};
-	componentDidUpdate(prevProps, prevStae) {
+	componentWillMount() {
+		const settings = {
+			viewport: {
+				width: "100%",
+				height: "100%",
+				latitude: this.props.latitude,
+				longitude: this.props.longitude,
+				zoom: 12
+			},
+			popupInfo: null,
+			provideLink: false
+		};
+		const initialState =
+			JSON.parse(window.sessionStorage.getItem("state")) || settings;
+
+		this.setState({ ...initialState });
+	}
+	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.longitude !== this.props.longitude) {
 			const newViewport = {
 				...this.state.viewport,
@@ -119,8 +141,21 @@ export default class VectorMap extends Component {
 				viewport: newViewport
 			});
 		}
+		if (
+			prevState.longitude !== this.state.longitude ||
+			prevState.popupInfo !== this.state.popupInfo
+		) {
+			window.sessionStorage.setItem(
+				"state",
+				JSON.stringify({ ...this.state })
+			);
+			window.sessionStorage.setItem("isMapShown", true);
+		}
 	}
 	render() {
+		const dataList =
+			this.props.propertyList ||
+			JSON.parse(window.sessionStorage.getItem("propertyList"));
 		return (
 			<ReactMapGL
 				// style={{ width: "100%", margin: "0 auto" }}
@@ -129,8 +164,9 @@ export default class VectorMap extends Component {
 				mapStyle="mapbox://styles/mapbox/streets-v10"
 				mapboxApiAccessToken={MAP_TOKEN}
 			>
-				{this.props.propertyList.length &&
-					this.props.propertyList.map(this.renderMarker)}
+				{/* {this.props.propertyList.length &&
+					this.props.propertyList.map(this.renderMarker)} */}
+				{dataList.map(this.renderMarker)}
 				{this.renderPopup()}
 			</ReactMapGL>
 		);
