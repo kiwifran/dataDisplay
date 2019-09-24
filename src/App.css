@@ -1,8 +1,4 @@
-/* My thanks to 
-
-Data and brand logo provide by Zillow API;
-default property Photo by Tierra Mallorca on Unsplash
-search page background house Photo by Jesse Roberts on Unsplash */
+/* */
 @import url('https://fonts.googleapis.com/css?family=ABeeZee|Cardo:700&display=swap');
 /* set up */
 
@@ -60,7 +56,8 @@ nav a {
 }
 nav a,
 .submitSearch,
-.propertyDetails a {
+.propertyDetails a,
+.popUpInfo a {
 	transition: all 0.2s;
 }
 nav a {
@@ -71,7 +68,8 @@ nav a {
 	justify-content: left;
 	align-items: center;
 }
-.iconContainer:hover a {
+.iconContainer:hover a,
+.popUpInfo a:hover {
 	color: rgba(26, 57, 59, 0.9);
 
 }
@@ -170,8 +168,11 @@ form [type="text"] {
 .description {
 	background-color: #d5e1df
 }
+.popUpInfo a,
 .propertyDetails a {
 	color:inherit;
+}
+.propertyDetails a {
 	font-size: 16px;
 }
 .propertyDetails a:hover {
