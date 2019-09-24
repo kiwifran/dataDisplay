@@ -1,14 +1,27 @@
 import React, { useState, useEffect } from "react";
 import defaultPicLarge from "../assets/defaultPicLarge.jpg";
 export default function Details(props) {
-	const { images, editedFacts, address, homeDescription } = props.infoDetails;
-	const { amount } = props.zestimate;
+	const initialDetails =
+		props.infoDetails ||
+		JSON.parse(window.sessionStorage.getItem("details"));
+	const initialZestimate =
+		props.zestimate ||
+		JSON.parse(window.sessionStorage.getItem("zestimate"));
+	const [propertyDetails, setDetails] = useState(initialDetails);
+	const [zestimateObj, setZestimate] = useState(initialZestimate);
+	const { images, editedFacts, address, homeDescription } = propertyDetails;
+	const { amount } = zestimateObj;
 	// const zpid = props.match.params.propertyId;
-	// const [propertyDetails, setDetails] = useState(null);
-	// useEffect(() => {
-
-	// 	fetchDetails(zpid);
-	// }, [zpid]);
+	useEffect(() => {
+		window.sessionStorage.setItem(
+			"details",
+			JSON.stringify(propertyDetails)
+		);
+		window.sessionStorage.setItem(
+			"zestimate",
+			JSON.stringify(zestimateObj)
+		);
+	}, [initialDetails]);
 	// const {}
 
 	return (

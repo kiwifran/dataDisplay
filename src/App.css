@@ -53,6 +53,7 @@ nav a {
 }
 nav a {
 	margin-left: 5px;
+	transition: all 0.2s;
 }
 .iconContainer {
 	display: flex;
@@ -95,6 +96,7 @@ form [type="text"] {
 	border:none;
 	font-size: 40px;
 	color:whitesmoke;
+	transition: all 0.3s;
 
 }
 

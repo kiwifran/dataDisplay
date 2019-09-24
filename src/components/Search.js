@@ -148,8 +148,6 @@ export default class Search extends Component {
 						/>
 					</div>
 				) : null}
-
-				{/* {PigeonMap} */}
 			</Fragment>
 		);
 	}
