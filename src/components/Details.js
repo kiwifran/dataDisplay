@@ -77,7 +77,7 @@ export default function Details(props) {
 					</p>
 				) : null}
 			</div>
-			<div className="detailStates infoContainer" tabIndex={0}>
+			<div className="propertyDetails infoContainer" tabIndex={0}>
 				{editedFacts && editedFacts.applicances ? (
 					<p>
 						<span>type:</span> {editedFacts.applicances}

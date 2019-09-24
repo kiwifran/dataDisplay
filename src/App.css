@@ -129,6 +129,7 @@ form [type="text"] {
 	height: 120px;
 }
 .detailsContainer {
+	min-height: calc(100vh - 45px);
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;

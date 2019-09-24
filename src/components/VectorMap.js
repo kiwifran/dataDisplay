@@ -138,7 +138,8 @@ export default class VectorMap extends Component {
 				zoom: 12
 			};
 			this.setState({
-				viewport: newViewport
+				viewport: newViewport,
+				popupInfo: null
 			});
 		}
 		if (
