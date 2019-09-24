@@ -9,18 +9,20 @@ This react app uses React to search and display home data, after downloading/clo
 3.  If there is a "details" word at the end of the information in the popup and you are interested in the property, please click on the "details" to see the details page of the selected property.The third example picture below displays the details page.
 4.  On the details page, you can go back to search page by clicking on the "Search" link near the top-left corner of the page or by clicking on back button of the browser.
 
-###Example Pictures
+### Example Pictures
+
 ![](src/assets/examplePic1.png)
 ![](src/assets/examplePic2.png)
 ![](src/assets/examplePic3.png)
 
-My thanks to
+### My thanks to
+
 Data and brand logo provide by Zillow API;
 Map provided by Mapbox;
 default property Photo by Tierra Mallorca on Unsplash;
 search page background house Photo by Jesse Roberts on Unsplash;
 
-##Thank you for using the app!
+## Thank you for using the app!
 
 ---
 
