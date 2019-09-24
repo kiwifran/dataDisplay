@@ -1,4 +1,4 @@
-# A brief user guide
+# A brief user's guide
 
 This react app uses React to search and display home data, after downloading/cloning the code, please run `npm install` to install necessary packages and `npm run start` to run the app and open http://localhost:3000 to see the app.
 
