@@ -8,12 +8,12 @@ export default class ShortInfo extends PureComponent {
 			provideLink,
 			info,
 			info: {
+				editedFacts,
 				bathrooms,
 				bedrooms,
 				zpid,
 				address: { street, city }
-			},
-			editedFacts
+			}
 		} = this.props;
 		const displayName = `${street}, ${city}`;
 
@@ -23,7 +23,7 @@ export default class ShortInfo extends PureComponent {
 					{info.images && info.images.image.url[0].length > 1 ? (
 						<img
 							src={info.images.image.url[0]}
-							alt="property picture"
+							alt={`picture of ${street}`}
 						/>
 					) : (
 						<img src={defaultPic} alt="default picture" />
@@ -31,7 +31,6 @@ export default class ShortInfo extends PureComponent {
 				</div>
 				<div>
 					{displayName}
-
 					<p>
 						{editedFacts && editedFacts.bedrooms ? (
 							<span>
@@ -57,8 +56,15 @@ export default class ShortInfo extends PureComponent {
 								<FontAwesomeIcon icon="bath" /> {+bathrooms}
 							</span>
 						) : null}
+						{editedFacts && editedFacts.finishedSqFt
+							? ` ${parseInt(
+									editedFacts.finishedSqFt
+							  ).toLocaleString()} sqft`
+							: null}
 						{!isNaN(+info.finishedSqFt)
-							? ` ${info.finishedSqFt} sqft`
+							? ` ${parseInt(
+									info.finishedSqFt
+							  ).toLocaleString()} sqft`
 							: null}
 					</p>
 					<p>

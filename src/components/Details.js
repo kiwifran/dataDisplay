@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import defaultPicLarge from "../assets/defaultPicLarge.jpg";
 export default function Details(props) {
+	// set up initial value for property details and Zestimate from props or session storage
 	const initialDetails =
 		props.infoDetails ||
 		JSON.parse(window.sessionStorage.getItem("details"));
 	const initialZestimate =
 		props.zestimate ||
 		JSON.parse(window.sessionStorage.getItem("zestimate"));
+	//use the initial value as the initial state
 	const [detailState, setDetails] = useState(initialDetails);
 	const [zestimateState, setZestimate] = useState(initialZestimate);
 	const {
@@ -17,7 +19,7 @@ export default function Details(props) {
 		links
 	} = detailState;
 	const { amount } = zestimateState;
-	// const zpid = props.match.params.propertyId;
+	//store the details and zestimate data into session storage
 	useEffect(() => {
 		window.sessionStorage.setItem("details", JSON.stringify(detailState));
 		window.sessionStorage.setItem(
@@ -29,7 +31,6 @@ export default function Details(props) {
 	return (
 		<div className="detailsContainer">
 			<div className="detailPicture">
-				{/* sometimes in the database when there is only one picture for the property, the database stores the url directly as the value for the url property, instead of storing it inside an array */}
 				{images && images.image.url[0].length > 1 ? (
 					<div className="detailPicture">
 						<img
@@ -111,7 +112,11 @@ export default function Details(props) {
 						{editedFacts.heatingSources}
 					</p>
 				) : null}
-				<a target="_blank" href={links.homeDetails}>
+				<a
+					target="_blank"
+					href={links.homeDetails}
+					rel="noopener noreferrer"
+				>
 					🏠See more details for {address.street} on Zillow{" "}
 				</a>
 			</div>

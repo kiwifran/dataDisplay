@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+//packages import
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -8,11 +9,13 @@ import {
 	faBed,
 	faBath
 } from "@fortawesome/free-solid-svg-icons";
+//files and components import
 import zillowLogo from "./assets/Zillowlogo.gif";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
 import Search from "./components/Search";
 import Details from "./components/Details";
+// fontawesome library
 library.add(faKey, faHome, faBed, faBath);
 export default class App extends Component {
 	constructor() {
@@ -22,6 +25,7 @@ export default class App extends Component {
 			zestimate: null
 		};
 	}
+	//listen to the click event on the map to pass data to the details component
 	handleClickOnMap = (info, zestimate) => {
 		this.setState({ infoDetails: info, zestimate });
 	};
@@ -37,7 +41,11 @@ export default class App extends Component {
 							</Link>
 						</div>
 						<div className="logoContainer">
-							<a target="_blank" href="http://www.zillow.com/ ">
+							<a
+								target="_blank"
+								href="http://www.zillow.com/"
+								rel="noopener noreferrer"
+							>
 								<img src={zillowLogo} alt="logo of Zillow" />
 							</a>
 						</div>

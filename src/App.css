@@ -1,3 +1,8 @@
+/* My thanks to 
+
+Data and brand logo provide by Zillow API;
+default property Photo by Tierra Mallorca on Unsplash
+search page background house Photo by Jesse Roberts on Unsplash */
 @import url('https://fonts.googleapis.com/css?family=ABeeZee|Cardo:700&display=swap');
 /* set up */
 
@@ -9,6 +14,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 
 .visuallyHidden:not(:focus):not(:active) { position: absolute; width: 1px; height: 1px; margin: -1px;border: 0;padding: 0;white-space: nowrap;clip-path: inset(100%);clip: rect(00 0 0);overflow: hidden;}
 
+/* basic settings */
 html {
 	font-size: 20px;
     font-family: 'ABeeZee', sans-serif;
@@ -32,12 +38,11 @@ img {
 	width: 100%;
 	height: 100%;
 	display: block;
-	/* object-fit:cover; */
 }
-
 .App {
 	text-align: center;
 }
+/* nav */
 nav {
 	height: 45px;
 	padding:5px 40px;
@@ -53,9 +58,13 @@ nav,
 nav a {
 	color:white;
 }
+nav a,
+.submitSearch,
+.propertyDetails a {
+	transition: all 0.2s;
+}
 nav a {
 	margin-left: 5px;
-	transition: all 0.2s;
 }
 .iconContainer {
 	display: flex;
@@ -66,12 +75,12 @@ nav a {
 	color: rgba(26, 57, 59, 0.9);
 
 }
-
 .logoContainer img {
 	height: 30px;
 	width: 120px;
 	display: inline-block;
 }
+/* header */
 header.searchHeader {
 	height: calc(100vh - 45px);
 	position: relative;
@@ -104,10 +113,7 @@ form [type="text"] {
 	border:none;
 	font-size: 40px;
 	color:whitesmoke;
-	transition: all 0.3s;
-
 }
-
 .inputs input:focus {
 	border: 5px inset  rgba(72,157,134,0.7)
 }
@@ -118,6 +124,7 @@ form [type="text"] {
 .submitSearch:focus {
 	color:burlywood;
 }
+/* map */
 .mapContainer {
 	width: 100vw;
 	height:100vh;
@@ -129,13 +136,10 @@ form [type="text"] {
 .popUpImage {
 	width: 240px;
 }
-/* .popUp {
-	background: red;
-} */
-
 .popUpImage {
 	height: 120px;
 }
+/* detail page */
 .detailsContainer {
 	min-height: calc(100vh - 45px);
 	display: flex;
@@ -147,7 +151,6 @@ form [type="text"] {
 	width: 50%;
 }
 .infoContainer {
-	
 	padding:20px 30px;
 	display: flex;
 	flex-direction: column;
@@ -156,7 +159,6 @@ form [type="text"] {
 .infoContainer:focus {
 	border:2px inset  rgba(72,157,134,0.7);
 }
-
 .detailPicture {
 	order:1;
 }
@@ -167,11 +169,9 @@ form [type="text"] {
 .addressInfo,
 .description {
 	background-color: #d5e1df
-
 }
 .propertyDetails a {
 	color:inherit;
-	transition:all 0.3s;
 	font-size: 16px;
 }
 .propertyDetails a:hover {
@@ -180,17 +180,16 @@ form [type="text"] {
 .description {
 	text-align: left;
 }
+/* media queries */
 @media (max-width:900px) {
 	header.searchHeader {
 		padding-top:37%;
 	}
 }
-
 @media (max-width:880px) {
 	.detailPicture,
 	.infoContainer {
 		width: 100%;
-		
 	}
 	.detailPicture {
 		order:0;
@@ -201,10 +200,9 @@ form [type="text"] {
 		flex-wrap: wrap;
 	}
 	form [type="text"] {
-	width: 80%;
-	margin: 5px auto;
+		width: 80%;
+		margin: 5px auto;
 	}
-	
 }
 
 @media (max-width:520px) {
@@ -214,12 +212,10 @@ form [type="text"] {
 	form [type="text"] {
 		height:40px;
 	}
-	
 	.description p {
 		line-height: 1.2;
 		font-size: 18px;
 	}
-	
 }
 @media (max-width:450px) {
 	nav {
@@ -228,6 +224,4 @@ form [type="text"] {
 	header.searchHeader {
 		padding-top: 68%;
 	}
-	
-	
 }
