@@ -41,6 +41,8 @@ img {
 nav {
 	height: 45px;
 	padding:5px 40px;
+	display: flex;
+	justify-content: space-between;
 	-webkit-box-shadow: 0px 8px 30px -9px rgba(132,168,235,0.77);
 	-moz-box-shadow: 0px 8px 30px -9px rgba(132,168,235,0.77);
 	box-shadow: 0px 8px 30px -9px rgba(132,168,235,0.77);	
@@ -63,6 +65,12 @@ nav a {
 .iconContainer:hover a {
 	color: rgba(26, 57, 59, 0.9);
 
+}
+
+.logoContainer img {
+	height: 30px;
+	width: 120px;
+	display: inline-block;
 }
 header.searchHeader {
 	height: calc(100vh - 45px);
@@ -161,6 +169,14 @@ form [type="text"] {
 	background-color: #d5e1df
 
 }
+.propertyDetails a {
+	color:inherit;
+	transition:all 0.3s;
+	font-size: 16px;
+}
+.propertyDetails a:hover {
+	color:  rgba(72,157,134,0.7)
+}
 .description {
 	text-align: left;
 }
@@ -206,6 +222,9 @@ form [type="text"] {
 	
 }
 @media (max-width:450px) {
+	nav {
+		padding: 5px 20px;
+	}
 	header.searchHeader {
 		padding-top: 68%;
 	}

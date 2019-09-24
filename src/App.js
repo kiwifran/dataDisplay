@@ -8,6 +8,7 @@ import {
 	faBed,
 	faBath
 } from "@fortawesome/free-solid-svg-icons";
+import zillowLogo from "./assets/Zillowlogo.gif";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./App.css";
 import Search from "./components/Search";
@@ -34,6 +35,11 @@ export default class App extends Component {
 							<Link to="/">
 								<p>Search</p>
 							</Link>
+						</div>
+						<div className="logoContainer">
+							<a target="_blank" href="http://www.zillow.com/ ">
+								<img src={zillowLogo} alt="logo of Zillow" />
+							</a>
 						</div>
 					</nav>
 					<Route

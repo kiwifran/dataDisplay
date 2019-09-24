@@ -9,7 +9,13 @@ export default function Details(props) {
 		JSON.parse(window.sessionStorage.getItem("zestimate"));
 	const [detailState, setDetails] = useState(initialDetails);
 	const [zestimateState, setZestimate] = useState(initialZestimate);
-	const { images, editedFacts, address, homeDescription } = detailState;
+	const {
+		images,
+		editedFacts,
+		address,
+		homeDescription,
+		links
+	} = detailState;
 	const { amount } = zestimateState;
 	// const zpid = props.match.params.propertyId;
 	useEffect(() => {
@@ -42,7 +48,7 @@ export default function Details(props) {
 			<div className="addressInfo  infoContainer" tabIndex={0}>
 				{amount && amount["$t"] ? (
 					<h2>
-						<span>Zestimate:</span> {amount.currency}{" "}
+						<span>Zestimate®:</span> {amount.currency}{" "}
 						{parseInt(amount["$t"]).toLocaleString()}
 					</h2>
 				) : null}
@@ -105,6 +111,9 @@ export default function Details(props) {
 						{editedFacts.heatingSources}
 					</p>
 				) : null}
+				<a target="_blank" href={links.homeDetails}>
+					🏠See more details for {address.street} on Zillow{" "}
+				</a>
 			</div>
 			{homeDescription ? (
 				<div className="description infoContainer" tabIndex={0}>
