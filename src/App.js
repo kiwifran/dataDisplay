@@ -52,8 +52,15 @@ export default class App extends Component {
 						render={() => {
 							return (
 								<Details
-									infoDetails={this.state.infoDetails}
-									zestimate={this.state.zestimate}
+									propertyInfo={
+										((infoDetails = {
+											...this.state.infoDetails
+										}),
+										(zestimate = {
+											...this.state.zestimate
+										}))
+									}
+									// ={this.state.zestimate}
 								/>
 							);
 						}}

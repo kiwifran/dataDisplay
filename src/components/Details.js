@@ -1,29 +1,44 @@
 import React, { useState, useEffect } from "react";
 import defaultPicLarge from "../assets/defaultPicLarge.jpg";
 export default function Details(props) {
-	const initialDetails =
-		props.infoDetails ||
-		JSON.parse(window.sessionStorage.getItem("details"));
-	const initialZestimate =
-		props.zestimate ||
-		JSON.parse(window.sessionStorage.getItem("zestimate"));
-	const [propertyDetails, setDetails] = useState(initialDetails);
-	const [zestimateObj, setZestimate] = useState(initialZestimate);
-	const { images, editedFacts, address, homeDescription } = propertyDetails;
-	const { amount } = zestimateObj;
+	// const initialDetails =
+	// 	props.infoDetails ||
+	// 	JSON.parse(window.sessionStorage.getItem("details"));
+	// const initialZestimate =
+	// 	props.zestimate ||
+	// 	JSON.parse(window.sessionStorage.getItem("zestimate"));
+	const initialPropertyInfo =
+		props.propertyInfo ||
+		JSON.parse(window.sessionStorage.getItem("storedPropertyInfo"));
+	// const [propertyDetails, setDetails] = useState(initialDetails);
+	// const [zestimateObj, setZestimate] = useState(initialZestimate);
+	const [propertyInfoState, setInfo] = useState(initialPropertyInfo);
+	// const { images, editedFacts, address, homeDescription } = propertyDetails;
+	// const { amount } = zestimateObj;
+	const {
+		images,
+		editedFacts,
+		address,
+		homeDescription
+	} = propertyInfoState.infoDetails;
+	const { amount } = propertyInfoState.zestimate;
 	// const zpid = props.match.params.propertyId;
+	// useEffect(() => {
+	// 	window.sessionStorage.setItem(
+	// 		"details",
+	// 		JSON.stringify(propertyDetails)
+	// 	);
+	// 	window.sessionStorage.setItem(
+	// 		"zestimate",
+	// 		JSON.stringify(zestimateObj)
+	// 	);
+	// }, [initialDetails]);
 	useEffect(() => {
 		window.sessionStorage.setItem(
-			"details",
-			JSON.stringify(propertyDetails)
+			"storedPropertyInfo",
+			JSON.stringify(propertyInfoState)
 		);
-		window.sessionStorage.setItem(
-			"zestimate",
-			JSON.stringify(zestimateObj)
-		);
-	}, [initialDetails]);
-	// const {}
-
+	}, [initialPropertyInfo]);
 	return (
 		<div className="detailsContainer">
 			<div className="detailPicture">
