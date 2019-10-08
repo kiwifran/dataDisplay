@@ -37,3 +37,15 @@
 -   enzyme, jest, or testing-library?
 
 -   how to test the map??
+-   how to test the redux
+
+7.refactor with redux
+
+-   which to save in the redux store?
+-   explore the concept of middleware
+-   when rerender the component-does the app still need to use session storage?
+
+8.minor improvements:
+
+-   a 404 page?
+-   defensively checking inputs for special cases

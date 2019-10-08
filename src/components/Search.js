@@ -4,17 +4,18 @@ import axios from "axios";
 import qs from "qs";
 import jump from "jump.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { connect } from "react-redux";
 //files and components import
 import Swal from "./SweetAlert";
 import VectorMap from "./VectorMap";
 import { GENERAL_API_URL, SEARCH_API_KEY } from "../constants/API";
-export default class Search extends Component {
+class Search extends Component {
 	constructor() {
 		super();
 		this.state = {
-			propertyList: null,
-			mapCenterLat: null,
-			mapCenterLon: null,
+			// propertyList: null,
+			// mapCenterLat: null,
+			// mapCenterLon: null,
 			addressInput: "",
 			cityStateZipInput: "",
 			isMapShown: null
@@ -32,6 +33,7 @@ export default class Search extends Component {
 		const { addressInput, cityStateZipInput } = this.state;
 		if (!/^\s*$/.test(addressInput) && !/^\s*$/.test(cityStateZipInput)) {
 			this.fetchData(addressInput, cityStateZipInput);
+			// e.target.reset();
 			this.setState({ addressInput: "", cityStateZipInput: "" });
 		} else Swal("Input Error!", "Please check your input");
 	};
@@ -64,10 +66,11 @@ export default class Search extends Component {
 				const { longitude, latitude } = data[
 					Math.floor(data.length / 2) - 1
 				].address;
-				this.setState({
+				this.props.dispatch({
+					type: "ADD_HOUSELIST",
 					propertyList: [...data],
-					mapCenterLon: +longitude,
-					mapCenterLat: +latitude
+					mapCenterLat: +latitude,
+					mapCenterLon: +longitude
 				});
 				// store the data in the session storage for later use
 				window.sessionStorage.setItem(
@@ -92,12 +95,8 @@ export default class Search extends Component {
 		}
 	}
 	render() {
-		const {
-			propertyList,
-			mapCenterLat,
-			mapCenterLon,
-			isMapShown
-		} = this.state;
+		const { isMapShown } = this.state;
+		const { propertyList, mapCenterLat, mapCenterLon } = this.props;
 		return (
 			<Fragment>
 				<header className="searchHeader">
@@ -164,3 +163,13 @@ export default class Search extends Component {
 		);
 	}
 }
+
+function mapStateToProps(reduxStore) {
+	const { propertyList, mapCenterLat, mapCenterLon } = reduxStore;
+	return {
+		propertyList,
+		mapCenterLat,
+		mapCenterLon
+	};
+}
+export default connect(mapStateToProps)(Search);

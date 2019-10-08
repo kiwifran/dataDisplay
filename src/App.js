@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 //packages import
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
@@ -17,7 +18,7 @@ import Search from "./components/Search";
 import Details from "./components/Details";
 // fontawesome library
 library.add(faKey, faHome, faBed, faBath);
-export default class App extends Component {
+class App extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -78,3 +79,4 @@ export default class App extends Component {
 		);
 	}
 }
+export default connect()(App);

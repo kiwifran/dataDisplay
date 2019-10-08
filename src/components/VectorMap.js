@@ -3,11 +3,12 @@ import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup } from "react-map-gl";
 import axios from "axios";
 import qs from "qs";
+import { connect } from "react-redux";
 //files and components import
 import Pin from "./Pin";
 import ShortInfo from "./ShortInfo";
 import { DETAILS_API_URL, SEARCH_API_KEY, MAP_TOKEN } from "../constants/API";
-export default class VectorMap extends Component {
+class VectorMap extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -163,3 +164,10 @@ export default class VectorMap extends Component {
 		);
 	}
 }
+function mapStateToProps(reduxStore) {
+	const { popupInfo } = reduxStore;
+	return {
+		popupInfo
+	};
+}
+export default connect(mapStateToProps)(VectorMap);
