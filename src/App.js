@@ -26,11 +26,12 @@ class App extends Component {
 			zestimate: null
 		};
 	}
-	//listen to the click event on the map to pass data to the details component
-	handleClickOnMap = (info, zestimate) => {
-		this.setState({ infoDetails: info, zestimate });
-	};
+	// //listen to the click event on the map to pass data to the details component
+	// handleClickOnMap = (info, zestimate) => {
+	// 	this.setState({ infoDetails: info, zestimate });
+	// };
 	render() {
+		const { propertyList, propertyDetails, index } = this.props;
 		return (
 			<Router>
 				<div className="App">
@@ -62,14 +63,19 @@ class App extends Component {
 							);
 						}}
 					/>
+
 					<Route
 						path="/properties/:propertyId"
-						render={props => {
+						render={() => {
 							return (
 								<Details
-									{...props}
-									infoDetails={this.state.infoDetails}
-									zestimate={this.state.zestimate}
+									// {...props}
+									infoDetails={propertyDetails}
+									zestimate={
+										propertyList
+											? propertyList[index]
+											: null
+									}
 								/>
 							);
 						}}
@@ -79,4 +85,12 @@ class App extends Component {
 		);
 	}
 }
-export default connect()(App);
+const mapStateToProps = reduxStore => {
+	const { propertyList, propertyDetails, index } = reduxStore;
+	return {
+		propertyList,
+		propertyDetails,
+		index
+	};
+};
+export default connect(mapStateToProps)(App);

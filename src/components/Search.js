@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 //files and components import
 import Swal from "./SweetAlert";
 import VectorMap from "./VectorMap";
+import { addHouselist } from "../store/actionCreators";
+
 import { GENERAL_API_URL, SEARCH_API_KEY } from "../constants/API";
 class Search extends Component {
 	constructor() {
@@ -66,12 +68,13 @@ class Search extends Component {
 				const { longitude, latitude } = data[
 					Math.floor(data.length / 2) - 1
 				].address;
-				this.props.dispatch({
-					type: "ADD_HOUSELIST",
-					propertyList: [...data],
-					mapCenterLat: +latitude,
-					mapCenterLon: +longitude
-				});
+				// this.props.dispatch({
+				// 	type: "ADD_HOUSELIST",
+				// 	propertyList: [...data],
+				// 	mapCenterLat: +latitude,
+				// 	mapCenterLon: +longitude
+				// });
+				this.props.onAddHouseList(data, longitude, latitude);
 				// store the data in the session storage for later use
 				window.sessionStorage.setItem(
 					"propertyList",
@@ -172,4 +175,13 @@ function mapStateToProps(reduxStore) {
 		mapCenterLon
 	};
 }
-export default connect(mapStateToProps)(Search);
+function mapDispatchToProps(dispatch) {
+	return {
+		onAddHouseList: (data, lon, lat) =>
+			dispatch(addHouselist(data, +lon, +lat))
+	};
+}
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(Search);

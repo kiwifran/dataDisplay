@@ -5,6 +5,7 @@ import axios from "axios";
 import qs from "qs";
 import { connect } from "react-redux";
 //files and components import
+import { focusOneProperty } from "../store/actionCreators";
 import Pin from "./Pin";
 import ShortInfo from "./ShortInfo";
 import { DETAILS_API_URL, SEARCH_API_KEY, MAP_TOKEN } from "../constants/API";
@@ -46,13 +47,14 @@ class VectorMap extends Component {
 					popupInfo: response,
 					provideLink: true
 				});
+				this.props.onFocusOneProperty(response, index);
 				//retrieve the lists  from the session storage to get the zestimate object for the situation when user comes back from details page and click on another marker on the map
-				const list =
-					this.props.propertyList ||
-					JSON.parse(window.sessionStorage.getItem("propertyList"));
-				const { zestimate } = list[index];
+				// const list =
+				// 	this.props.propertyList ||
+				// 	JSON.parse(window.sessionStorage.getItem("propertyList"));
+				// const { zestimate } = list[index];
 				// pass the data to the app.js for details page
-				this.props.handleClickOnMap(response, zestimate);
+				// this.props.handleClickOnMap(response, zestimate);
 			} else {
 				//if the error code is 501 or 502(no updated details in the api database or protected data not available through api calls), use the data from the former api call(general search) to show in the popup
 				console.log(`error code ${code}`);
@@ -170,4 +172,14 @@ function mapStateToProps(reduxStore) {
 		popupInfo
 	};
 }
-export default connect(mapStateToProps)(VectorMap);
+function mapDispathToProps(dispatch) {
+	return {
+		onFocusOneProperty: (data, index) => {
+			dispatch(focusOneProperty(data, index));
+		}
+	};
+}
+export default connect(
+	mapStateToProps,
+	mapDispathToProps
+)(VectorMap);
