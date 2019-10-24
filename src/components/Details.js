@@ -26,8 +26,8 @@ export default function Details(props) {
 			"zestimate",
 			JSON.stringify(zestimateState)
 		);
-	}, [props.match.params.propertyId]);
-
+	}, []);
+	//  const a = [props.match.params.propertyId];
 	return (
 		<div className="detailsContainer">
 			<div className="detailPicture">

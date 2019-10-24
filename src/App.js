@@ -58,7 +58,7 @@ class App extends Component {
 						render={() => {
 							return (
 								<Search
-									handleClickOnMap={this.handleClickOnMap}
+								// handleClickOnMap={this.handleClickOnMap}
 								/>
 							);
 						}}
@@ -73,7 +73,7 @@ class App extends Component {
 									infoDetails={propertyDetails}
 									zestimate={
 										propertyList
-											? propertyList[index]
+											? propertyList[index].zestimate
 											: null
 									}
 								/>
