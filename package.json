@@ -10,7 +10,7 @@
     "jump.js": "^1.0.2",
     "pigeon-maps": "^0.14.0",
     "pigeon-marker": "^0.3.4",
-    "qs": "^6.8.0",
+    "qs": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-map-gl": "^5.0.10",
